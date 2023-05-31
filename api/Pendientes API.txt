@@ -1,0 +1,62 @@
+Carpetas
+
+API/
+Archivos: 
+    -.ENV
+    - index.js: 
+    Antes del server.lister > debemos colocar la funcion 
+    que trae todos los datos de la API - country
+    y lo guardamos en la base de datos.
+
+SRC / 
+    Carpetas:
+        - Controller
+            Archivos: 
+                - Todas Las Funciones(GET,POST,etc) que haran el llamado a la API + BDD
+                
+        - Handlers
+            Archivos:
+                - Archivos que manejaremos los controller: Maneja las respuestas
+                con  TRY/CATCH 
+
+        - Models (ya creada):
+            Archivos:
+        - Modelo -> Country.js
+        solictud de MODELO:  "country"
+        +ID (Código de tres letras). * -> Propiedad API : "cca3" (string)
+        +Nombre. * -> Propiedad API : "name" -> Es un Objeto {} -> Dentro usaremos "common"
+        +Imagen de la bandera. *: -> Propiedad API : "flaps" {} "png" "alt"
+        +Continente. *-> Propiedad API : "continents" [] 
+        +Capital. *-> Propiedad API : "capital" []
+        +Subregión.-> Propiedad API : "subregion" (solo string)
+        +Área.-> Propiedad API : "area" (es un NUMBER)
+        +Población. *-> Propiedad API : "population" (es un NUMBER)
+        +Timestamps : false
+
+        - Modelo -> Activity.js 
+        solictud de MODELO:  "activity"
+        +ID. * -> UUID 
+        +name. * ->  (STRING)
+        +difficulty. * -> (INTEGER)
+            Validation{
+                min: 1
+                max: 5
+            }
+        +season. * -> (ENUM("Verano","Otoño","Invierno","Primavera"))
+        +Timestamps : false
+        
+
+        - Route (ya Creada):
+            Archivos:
+                - Route -> /Country
+                - Route -> /Activity 
+
+    Archivos: 
+        - db.js
+            debemos Agregar: 
+            linea33 -> const { Country, Activity } = sequealize.models
+
+            Country.belongToMany (Activity, {true: Coun_Act})
+            Activity.belongToMany (Country, {true: Coun_Act})
+
+        
