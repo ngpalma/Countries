@@ -25,15 +25,16 @@ module.exports = (sequelize) => {
       capital: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: "Sin Capital"
       },
       subregion: {
         type: DataTypes.STRING,
       },
       area: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
       },
       population: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false,
       },
     },
