@@ -1,0 +1,19 @@
+.ppalContainer {
+  background-image: url(https://rare-gallery.com/uploads/posts/349956-4k-wallpaper.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+  background-origin: content-box;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ppalContainer img {
+  width: 150px;
+  height: 150px;
+}

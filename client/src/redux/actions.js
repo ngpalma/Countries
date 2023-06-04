@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   GET_ALL_COUNTRIES,
+  CREATE_ACTIVITY,
   GET_ALL_ACTIVITIES,
   GET_COUNTRIES_NAME,
   GET_COUNTRY_ID,
@@ -8,6 +9,7 @@ import {
   FILTER_BY_ACTIVITY,
   ORDER_BY_NAME,
   ORDER_BY_POPULATION,
+  SET_CURRENT_PAGE,
 } from "./types.js";
 
 export const getAllCountries = () => {
@@ -15,6 +17,14 @@ export const getAllCountries = () => {
     const countries = await axios.get("http://localhost:3001/countries");
     const allCountries = countries.data;
     dispatch({ type: GET_ALL_COUNTRIES, payload: allCountries });
+  };
+};
+
+export const createActivity = () => {
+  return async (dispatch) => {
+    const activity = await axios.post("http://localhost:3001/activities");
+    const newActivity = activity.data;
+    dispatch({ type: CREATE_ACTIVITY, payload: newActivity });
   };
 };
 
@@ -69,5 +79,12 @@ export const orderByPopulation = (population) => {
   return {
     type: ORDER_BY_POPULATION,
     payload: population,
+  };
+};
+
+export const setCurrentPage = (page) => {
+  return {
+    type: SET_CURRENT_PAGE,
+    payload: page,
   };
 };

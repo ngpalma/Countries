@@ -1,9 +1,10 @@
 const { Country, Activity } = require("../db");
 
-const postActivity = async (name, difficulty, season, countries) => {
+const postActivity = async (name, difficulty, season, duration, countries) => {
   const [newActivity, created] = await Activity.findOrCreate({
     where: {
       name,
+      duration,
       difficulty,
       season,
     },
@@ -23,8 +24,8 @@ const getAllActivities = async () => {
   const allActivities = await Activity.findAll({
     include: {
       model: Country,
-      attibutes: ["name"],
-      through: { attibutes: [] },
+      attributes: ["name"],
+      through: { attributes: [] },
     },
   });
   return allActivities;

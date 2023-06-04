@@ -15,6 +15,9 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      duration: {
+        type: DataTypes.STRING,
+      },
       difficulty: {
         type: DataTypes.INTEGER,
         allowNull: false,
