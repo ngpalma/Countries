@@ -1,0 +1,28 @@
+.imgDetailCss img {
+    max-width: 100%;
+    border-style:solid;
+  }
+  
+  .detailCss {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+    font-style: oblique;
+  }
+  
+  .ppalDetail {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-image: url("https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2017/10/268015-mapamundi.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+  overflow: hidden;
+  background-origin: content-box;
+  }
+  

@@ -1,0 +1,18 @@
+.HomeFilters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 15px;
+    border: 1px solid black;
+    align-items: center;
+  }
+  .ppalHome {
+    background-image: url("https://images.ecestaticos.com/q_LkdOe0sqZmPRHmfMzMEYCi3aM=/0x0:1254x836/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F405%2F46d%2F46a%2F40546d46aeb1cbc50a89643a1bef684b.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  overflow: scroll;
+  background-origin: content-box;
+  background-attachment: fixed;
+  }

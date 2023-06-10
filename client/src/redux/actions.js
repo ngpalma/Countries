@@ -10,6 +10,8 @@ import {
   ORDER_BY_NAME,
   ORDER_BY_POPULATION,
   SET_CURRENT_PAGE,
+  CLEAN_FILTER_CONTINENT,
+  CLEAN_FILTER_ACTIVITY,
 } from "./types.js";
 
 export const getAllCountries = () => {
@@ -81,6 +83,18 @@ export const orderByPopulation = (population) => {
     payload: population,
   };
 };
+
+export function cleanFilterContinent() {
+  return {
+    type: CLEAN_FILTER_CONTINENT,
+  };
+}
+
+export function cleanFilterActivity() {
+  return {
+    type: CLEAN_FILTER_ACTIVITY,
+  };
+}
 
 export const setCurrentPage = (page) => {
   return {

@@ -1,5 +1,5 @@
 .ppalContainer {
-  background-image: url(https://rare-gallery.com/uploads/posts/349956-4k-wallpaper.jpg);
+  background-image: url("https://rare-gallery.com/uploads/posts/349956-4k-wallpaper.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -16,4 +16,9 @@
 .ppalContainer img {
   width: 150px;
   height: 150px;
+}
+
+.ppalContainer img:hover{
+  width: 300px;
+  height: 300px;
 }

@@ -1,0 +1,52 @@
+.imgCard {
+  width: 250px;
+  height: 150px;
+  margin: 10px;
+}
+.imgCard:hover{
+  border-radius: 100%;
+  width: 250px;
+  height: 150px;
+  margin: 10px;
+}
+
+.cardCss {
+  background-color: cadetblue;
+  display: flex;
+  border: 1px solid black;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: fit-content;
+  height: fit-content;
+  align-items: center;
+  width: 300px;
+  margin-top: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+}
+
+.Card {
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+}
+
+.Card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.cardCss h3 {
+  font-weight: bold;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.cardCss h4 {
+  font-size: 14px;
+  color: red;
+}

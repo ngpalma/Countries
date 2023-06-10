@@ -9,6 +9,8 @@ import {
   ORDER_BY_NAME,
   ORDER_BY_POPULATION,
   SET_CURRENT_PAGE,
+  CLEAN_FILTER_CONTINENT,
+  CLEAN_FILTER_ACTIVITY,
 } from "./types.js";
 
 const initialState = {
@@ -18,6 +20,8 @@ const initialState = {
   postActivity: {},
   currentPage: 1,
   continentCountries: [],
+  filterContinent: [],
+  filterActivity: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -27,6 +31,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case CREATE_ACTIVITY:
       return { ...state, postActivity: payload };
     case GET_ALL_ACTIVITIES:
+      
       return { ...state, allActivities: payload };
     case GET_COUNTRIES_NAME:
       return { ...state, allCountries: payload };
@@ -36,13 +41,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
       const countries = [...state.allCountries];
       return {
         ...state,
-        allCountries: countries.filter((c) => c.continent === payload),
+        filterContinent: countries.filter((c) => c.continent === payload),
       };
     case FILTER_BY_ACTIVITY:
       const countryAct = [...state.allCountries];
       return {
         ...state,
-        allCountries: countryAct.filter((c) =>
+        filterActivity: countryAct.filter((c) =>
           c.activities.some((act) => act.name.includes(payload))
         ),
       };
@@ -72,22 +77,15 @@ const rootReducer = (state = initialState, { type, payload }) => {
           } else return 0;
         }),
       };
+    case CLEAN_FILTER_CONTINENT:
+      return { ...state, filterContinent: [] };
+    case CLEAN_FILTER_ACTIVITY:
+      return { ...state, filterActivity: [] };
     case SET_CURRENT_PAGE:
       return { ...state, currentPage: payload };
     default:
       return { ...state };
   }
 };
-
-// const funcionOrdenadora = (array, valor, payload) => {
-//   array.sort((a, b) => {
-//     if (a.prop > b.prop) {
-//       return payload === valor ? -1 : 1;
-//     }
-//     if (a.prop < b.prop) {
-//       return payload === valor ? 1 : -1;
-//     } else return 0;
-//   });
-// };
 
 export default rootReducer;

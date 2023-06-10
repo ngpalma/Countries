@@ -3,7 +3,7 @@ const { Country, Activity } = require("../db");
 
 const getAllCountriesApi = async () => {
   const response = await axios.get(
-    "https://restcountries.com/v2/all?fields=alpha3Code,name,flags,region,capital,subregion,area,population"
+    "https://rest-countries.up.railway.app/v2/all"
   );
   const countries = response.data;
   return countries;
