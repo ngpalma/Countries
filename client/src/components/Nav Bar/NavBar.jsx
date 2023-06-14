@@ -1,16 +1,14 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { SearchBar } from "../index";
 import style from "./NavBar.module.css";
-
 
 const NavBar = () => {
   return (
     <div className={style.navContainer}>
-      <Link to="/home">Volver a la página principal</Link>
-      
-      <Link to="/form">Crear Actividad</Link>
+      <NavLink to="/home" className={style.navHome}>Volver a la página principal</NavLink>
+      <NavLink to="/form" className={style.navForm}>Crear Actividad Turística</NavLink>
       <SearchBar />
-      <Link to="/">Salir de la aplicación</Link>
+      <NavLink to="/" className={style.navLand}>Salir de la aplicación</NavLink>
     </div>
   );
 };

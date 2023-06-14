@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCountriesName } from "../../redux/actions";
+import style from "./SearchBar.module.css";
 
 const SearchBar = () => {
   const [countryName, setCountryName] = useState("");
@@ -17,9 +18,9 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
+    <div className={style.searchDiv}>
       <input
-        type="text"
+        type="search"
         placeholder="Busque un pais por nombre..."
         value={countryName}
         onChange={handleInputChange}

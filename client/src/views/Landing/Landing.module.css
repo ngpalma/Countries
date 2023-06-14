@@ -18,7 +18,37 @@
   height: 150px;
 }
 
-.ppalContainer img:hover{
+.ppalContainer img:hover {
   width: 300px;
   height: 300px;
+}
+
+.ppalContainer h1 {
+  color: #005792;
+  text-shadow: 3px 3px 1px #00204a;
+}
+
+.ppalContainer h2 {
+  font-size: 30px;
+  text-shadow: 3px 3px 1px white;
+
+}
+
+.linksDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.linksDiv img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+}
+
+.linksDiv img:hover {
+  background-color: #fdb44b;
+  width: 50px;
+  height: 50px;
 }

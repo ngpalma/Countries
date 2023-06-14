@@ -1,10 +1,27 @@
 .navContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    border-radius: 15px;
-    border: 1px solid black;
-    align-items: center;
-    background-color: cadetblue;
-    padding: 5px;
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 3px solid white;
+  border-style: double;
+  align-items: center;
+  background-color: #00204a;
+  padding: 5px;
+}
+
+.navHome {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+.navForm {
+  text-decoration: none;
+  color: whitesmoke;
+
+}
+
+.navLand {
+  text-decoration: none;
+  color: whitesmoke;
+
+}

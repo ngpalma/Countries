@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1em;
@@ -10,12 +10,12 @@
 .prevButton,
 .nextButton {
   background-color: #f2f2f2;
-  border: none;
+  border: 1px solid black;
   border-radius: 4px;
   padding: 8px 16px;
   font-size: 14px;
   font-weight: bold;
-  color: #333333;
+  color: black;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -23,7 +23,7 @@
 
 .prevButton:hover,
 .nextButton:hover {
-  background-color: blueviolet;
+  background-color: #fdb44b;
 }
 
 .divButtons {

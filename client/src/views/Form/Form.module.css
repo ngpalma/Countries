@@ -1,5 +1,5 @@
 .ppalForm {
-  color: aliceblue;
+  color: black;
   background-image: url("https://images6.alphacoders.com/400/400645.jpg");
   background-repeat: no-repeat;
   background-position: center;
@@ -12,17 +12,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
 }
 
-hr {
-  border: none;
-  height: 1px;
-  background-color: transparent;
+.ppalForm input {
+  width: 328px;
+}
+
+
+
+.ppalForm p{
+  margin-bottom: 0;
 }
 
 button {
   background-color: #f2f2f2;
-  border: none;
   border-radius: 4px;
   padding: 8px 16px;
   font-size: 14px;
@@ -33,7 +37,35 @@ button {
   transition: background-color 0.3s ease;
 }
 
+
+
 button:hover {
-  background-color: blue;
-  color: wheat;
+  background-color: #fdb44b;
+  color: #00204a;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+}
+
+span {
+  color: red
+}
+
+form{
+  background-color: #fdb44b;
+  border-style: double;
+
+}
+
+.buttonSubmit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonSubmit button:hover {
+  background-color: #00204a;
+  color: #fdb44b;
 }

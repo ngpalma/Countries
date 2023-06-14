@@ -1,14 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import validate from "../validate";
 import { getAllCountries } from "../../redux/actions";
-import style from "./Form.module.css"
+import style from "./Form.module.css";
 
 const Form = () => {
   const country = useSelector((state) => state.allCountries);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getAllCountries());
@@ -54,8 +56,14 @@ const Form = () => {
     event.preventDefault();
     axios
       .post("http://localhost:3001/activities", form)
-      .then((res) => alert("Actividad creada correctamente"))
-      .catch((err) => alert(err));
+      .then((res) => {
+        alert("Actividad creada correctamente");
+        navigate("/home");
+      })
+      .catch((err) => {
+        alert("Ocurrió un error durante la creación");
+        navigate("/home");
+      });
     setForm({
       name: "",
       difficulty: "",
@@ -77,7 +85,7 @@ const Form = () => {
       <form onSubmit={handleSubmit}>
         {/* NOMBRE DE LA ACTIVIDAD */}
         <label htmlFor="name">
-          <p>Nombre de la actividad:</p>
+          <p>Nombre de la actividad turística:</p>
           <input
             type="text"
             name="name"
@@ -118,7 +126,7 @@ const Form = () => {
         <label htmlFor="duration">
           <p>Duración:</p>
           <input
-            type="text"
+            type="number"
             name="duration"
             placeholder="Ingrese la duración de la actividad en horas..."
             value={form.duration}
@@ -129,7 +137,7 @@ const Form = () => {
 
         {/* PAISES */}
         <label htmlFor="countries">
-          <p>Paises:</p>
+          <p>Paises donde se pueda realizar:</p>
           <input
             type="text"
             name="countries"
@@ -137,7 +145,6 @@ const Form = () => {
             value={arrayName}
             onChange={handleChange}
           />
-          <hr />
           <select
             name="countries"
             multiple={true}
@@ -153,7 +160,15 @@ const Form = () => {
           {errors.countries && <span>{errors.countries}</span>}
         </label>
         <br />
-        <button type="submit">Crear Actividad</button>
+        {form.name.length &&
+          form.difficulty.length &&
+          form.season.length &&
+          form.duration.length &&
+          form.countries.length && (
+            <div className={style.buttonSubmit}>
+              <button type="submit">Crear Actividad</button>
+            </div>
+          )}
       </form>
     </div>
   );

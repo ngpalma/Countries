@@ -1,22 +1,27 @@
 .imgDetailCss img {
     max-width: 100%;
-    border-style:solid;
+    border:5px solid black;
   }
   
   .detailCss {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: black;
+    color: crimson;
     font-style: oblique;
+    text-shadow: 1px 1px 1px black;
+  }
+
+  .detailCss h3{
+    margin: 10px;
   }
   
   .ppalDetail {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    background-image: url("https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2017/10/268015-mapamundi.jpg");
+    justify-content:space-evenly;
+    background-image: url("https://static.nationalgeographic.es/files/styles/image_3200/public/02-map-day-launch.adapt_.1900.1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -26,3 +31,4 @@
   background-origin: content-box;
   }
   
+  /* https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2017/10/268015-mapamundi.jpg */

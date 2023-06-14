@@ -1,0 +1,7 @@
+.searchDiv {
+    display: flex;
+}
+
+.searchDiv input{
+    width: 200px;
+}

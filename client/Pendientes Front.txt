@@ -1,0 +1,29 @@
+Form:
+    -tengo que permitir que seleccionen varias estaciones del año
+    -ver por qué se rompe el select de paises a veces y a veces no
+    -mostrar una imagen de creado correctamente en vez de un alert, lo mismo cuando falla
+    -No debe permitir cargar ítems repetidos. Manejar errores de los request que envía al back
+
+Home:
+    -solucionar problema de filtrado de la primera opcion que aparece en cada select
+
+CSS:
+    -refactorizar o ver como hacer para no repetir tanto código
+
+Barra de busqueda:
+    -cuando no hay coincidencia lanza un AxiosError. Hacer que aparezca un mensaje de "No se encontro ningun pais"
+
+REDUX:
+    -limpiar el estado de Detail
+
+Paginado:
+    -Renderizar números de página y flechas. Indicar en qué página está. Estár perfectamente combinado con los filtrados y la searchbar.
+
+
+ESTO ES LO ULTIMO:
+
+Testing:
+    -Hacer por lo menos algunos tests basicos tanto del back como del front
+
+Deploy:
+    -Hacer deploy
