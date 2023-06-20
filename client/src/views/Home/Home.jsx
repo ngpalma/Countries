@@ -32,7 +32,7 @@ const Home = () => {
             name="orderByName"
             onChange={(e) => dispatch(orderByName(e.target.value))}
           >
-            {["Orden Ascendente", "Orden Descendente"].map((e, i) => (
+            {["A-Z", "Z-A"].map((e, i) => (
               <option value={e} key={i}>
                 {e}
               </option>

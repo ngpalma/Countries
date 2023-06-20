@@ -21,7 +21,7 @@ const Detail = () => {
         <h3> Cantidad de habitantes: {population} </h3>
         <h3> Continente: {continent} </h3>
         <h3> Subregión: {subregion} </h3>
-        {activities.length > 0 && (
+        {activities && (
           <div>
             <h3> Actividades: {activities.map((a) => a.name).join(", ")} </h3>
           </div>

@@ -1,11 +1,7 @@
 Form:
-    -tengo que permitir que seleccionen varias estaciones del año
     -ver por qué se rompe el select de paises a veces y a veces no
     -mostrar una imagen de creado correctamente en vez de un alert, lo mismo cuando falla
     -No debe permitir cargar ítems repetidos. Manejar errores de los request que envía al back
-
-Home:
-    -solucionar problema de filtrado de la primera opcion que aparece en cada select
 
 CSS:
     -refactorizar o ver como hacer para no repetir tanto código

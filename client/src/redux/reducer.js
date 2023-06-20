@@ -19,7 +19,6 @@ const initialState = {
   idCountry: {},
   postActivity: {},
   currentPage: 1,
-  continentCountries: [],
   filterContinent: [],
   filterActivity: [],
 };
@@ -31,7 +30,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case CREATE_ACTIVITY:
       return { ...state, postActivity: payload };
     case GET_ALL_ACTIVITIES:
-      
       return { ...state, allActivities: payload };
     case GET_COUNTRIES_NAME:
       return { ...state, allCountries: payload };
@@ -57,10 +55,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         allCountries: countriesName.sort((a, b) => {
           if (a.name > b.name) {
-            return payload === "Orden Ascendente" ? 1 : -1;
+            return payload === "A-Z" ? 1 : -1;
           }
           if (a.name < b.name) {
-            return payload === "Orden Ascendente" ? -1 : 1;
+            return payload === "A-Z" ? -1 : 1;
           } else return 0;
         }),
       };

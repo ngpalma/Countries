@@ -119,6 +119,13 @@ const Form = () => {
             value={form.season}
             onChange={handleChange}
           />
+          <select name="season" value={form.season} onChange={handleChange}>
+            {["Verano", "Otoño", "Invierno", "Primavera"].map((t, i) => (
+              <option value={t} key={i}>
+                {t}
+              </option>
+            ))}
+          </select>
           {errors.season && <span>{errors.season}</span>}
         </label>
 
@@ -160,11 +167,11 @@ const Form = () => {
           {errors.countries && <span>{errors.countries}</span>}
         </label>
         <br />
-        {form.name.length &&
-          form.difficulty.length &&
-          form.season.length &&
-          form.duration.length &&
-          form.countries.length && (
+        {form.name.length !== 0 &&
+          form.difficulty.length !== 0 &&
+          form.season.length !== 0 &&
+          form.duration.length !== 0 &&
+          form.countries.length !== 0 && (
             <div className={style.buttonSubmit}>
               <button type="submit">Crear Actividad</button>
             </div>
