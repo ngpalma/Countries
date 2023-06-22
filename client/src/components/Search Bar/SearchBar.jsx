@@ -19,13 +19,15 @@ const SearchBar = () => {
 
   return (
     <div className={style.searchDiv}>
+      <form onSubmit={handleSearch}>
       <input
         type="search"
         placeholder="Busque un pais por nombre..."
         value={countryName}
         onChange={handleInputChange}
       />
-      <button onClick={handleSearch}>BUSCAR</button>
+      <button type="submit">BUSCAR</button>
+      </form>
     </div>
   );
 };

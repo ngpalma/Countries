@@ -43,13 +43,17 @@ export const getCountriesName = (name) => {
     const countries = (
       await axios.get(`http://localhost:3001/countries?name=${name}`)
     ).data;
-    if (countries) {
+
+    if (typeof countries !== "string") {
       dispatch({
         type: GET_COUNTRIES_NAME,
         payload: countries,
       });
     } else {
-      dispatch(alert("errorMessage"));
+      dispatch({
+        type: GET_COUNTRIES_NAME,
+        payload: alert("alerta"),
+      });
     }
   };
 };
