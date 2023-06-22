@@ -50,30 +50,60 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ),
       };
     case ORDER_BY_NAME:
-      const countriesName = [...state.allCountries];
+      const countriesName = state.filterContinent.length
+        ? [...state.filterContinent]
+        : state.filterActivity.length
+        ? [...state.filterActivity]
+        : [...state.allCountries];
+      // const countriesName = [...state.allCountries];
+      const sortName = countriesName.sort((a, b) => {
+        if (a.name > b.name) {
+          return payload === "A-Z" ? 1 : -1;
+        }
+        if (a.name < b.name) {
+          return payload === "A-Z" ? -1 : 1;
+        } else return 0;
+      });
       return {
         ...state,
-        allCountries: countriesName.sort((a, b) => {
-          if (a.name > b.name) {
-            return payload === "A-Z" ? 1 : -1;
-          }
-          if (a.name < b.name) {
-            return payload === "A-Z" ? -1 : 1;
-          } else return 0;
-        }),
+        filterContinent: state.filterContinent.length
+          ? sortName
+          : state.filterContinent,
+        filterActivity: state.filterActivity.length
+          ? sortName
+          : state.filterActivity,
+        allCountries:
+          !state.filterContinent.length && !state.filterActivity.length
+            ? sortName
+            : state.allCountries,
       };
     case ORDER_BY_POPULATION:
-      const countriesPopulation = [...state.allCountries];
+      const countriesPopulation = state.filterContinent.length
+        ? [...state.filterContinent]
+        : state.filterActivity.length
+        ? [...state.filterActivity]
+        : [...state.allCountries];
+      // const countriesPopulation = [...state.allCountries];
+      const sortPop = countriesPopulation.sort((a, b) => {
+        if (a.population > b.population) {
+          return payload === "Mayor Población" ? -1 : 1;
+        }
+        if (a.population < b.population) {
+          return payload === "Mayor Población" ? 1 : -1;
+        } else return 0;
+      });
       return {
         ...state,
-        allCountries: countriesPopulation.sort((a, b) => {
-          if (a.population > b.population) {
-            return payload === "Mayor Población" ? -1 : 1;
-          }
-          if (a.population < b.population) {
-            return payload === "Mayor Población" ? 1 : -1;
-          } else return 0;
-        }),
+        filterContinent: state.filterContinent.length
+          ? sortPop
+          : state.filterContinent,
+        filterActivity: state.filterActivity.length
+          ? sortPop
+          : state.filterActivity,
+        allCountries:
+          !state.filterContinent.length && !state.filterActivity.length
+            ? sortPop
+            : state.allCountries,
       };
     case CLEAN_FILTER_CONTINENT:
       return { ...state, filterContinent: [] };

@@ -40,18 +40,16 @@ export const getAllActivities = () => {
 
 export const getCountriesName = (name) => {
   return async (dispatch) => {
-    const countries = await axios.get(
-      `http://localhost:3001/countries?name=${name}`
-    );
-    console.log(countries);
-    if (countries.status === 200) {
+    const countries = (
+      await axios.get(`http://localhost:3001/countries?name=${name}`)
+    ).data;
+    if (countries) {
       dispatch({
         type: GET_COUNTRIES_NAME,
-        payload: countries.data,
+        payload: countries,
       });
     } else {
-      const errorMessage = countries.response.data;
-      return alert(errorMessage);
+      dispatch(alert("errorMessage"));
     }
   };
 };
