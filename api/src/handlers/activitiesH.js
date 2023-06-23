@@ -24,8 +24,6 @@ const postActivityHandler = async (req, res) => {
 const getActivitiesHandler = async (req, res) => {
   try {
     const allActivities = await getAllActivities();
-    // if (!allActivities.length)
-    //   throw new Error("Aún no hay actividades creadas, crea una para comenzar");
     res.status(200).json(allActivities);
   } catch (error) {
     res.status(400).json(error.message);

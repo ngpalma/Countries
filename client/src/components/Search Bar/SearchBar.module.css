@@ -1,8 +1,14 @@
 .searchDiv {
     display: flex;
+    align-items: center;
 }
 
 .searchDiv input{
     width: 200px;
     height: 33px;
+}
+
+.error {
+    color: red;
+    font-size: 15px;
 }

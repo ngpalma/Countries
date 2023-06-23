@@ -13,6 +13,8 @@ import {
   CLEAN_FILTER_CONTINENT,
   CLEAN_FILTER_ACTIVITY,
   CLEAN_DETAIL,
+  GET_COUNTRIES_NAME_ERROR,
+  CLEAR_ERROR,
 } from "./types.js";
 
 export const getAllCountries = () => {
@@ -41,19 +43,20 @@ export const getAllActivities = () => {
 
 export const getCountriesName = (name) => {
   return async (dispatch) => {
-    const countries = (
-      await axios.get(`http://localhost:3001/countries?name=${name}`)
-    ).data;
-
-    if (typeof countries !== "string") {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/countries?name=${name}`
+      );
+      const countries = response.data;
+      dispatch({ type: CLEAR_ERROR });
       dispatch({
         type: GET_COUNTRIES_NAME,
         payload: countries,
       });
-    } else {
+    } catch (error) {
       dispatch({
-        type: GET_COUNTRIES_NAME,
-        payload: alert("alerta"),
+        type: GET_COUNTRIES_NAME_ERROR,
+        payload: "Error: ¡El país que busca no existe!",
       });
     }
   };
@@ -116,4 +119,7 @@ export const setCurrentPage = (page) => {
 
 export function cleanDetail() {
   return { type: CLEAN_DETAIL };
+}
+export function clearError() {
+  return { type: CLEAR_ERROR };
 }

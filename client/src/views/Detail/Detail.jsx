@@ -12,7 +12,7 @@ const Detail = () => {
   useEffect(() => {
     dispatch(getCountryId(id));
     return () => {
-      dispatch(cleanDetail);
+      dispatch(cleanDetail());
     };
   }, [dispatch, id]);
   return (
