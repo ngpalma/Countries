@@ -11,6 +11,7 @@ import {
   SET_CURRENT_PAGE,
   CLEAN_FILTER_CONTINENT,
   CLEAN_FILTER_ACTIVITY,
+  CLEAN_DETAIL,
 } from "./types.js";
 
 const initialState = {
@@ -111,6 +112,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return { ...state, filterActivity: [] };
     case SET_CURRENT_PAGE:
       return { ...state, currentPage: payload };
+    case CLEAN_DETAIL:
+      return { ...state, idCountry: {} };
     default:
       return { ...state };
   }

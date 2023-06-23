@@ -118,8 +118,11 @@ const Form = () => {
             placeholder="Ingrese una estación o temporada del año..."
             value={form.season}
             onChange={handleChange}
+            hidden
           />
           <select name="season" value={form.season} onChange={handleChange}>
+          <option value="" key="first" hidden>Selecciona una opción</option>
+
             {["Verano", "Otoño", "Invierno", "Primavera"].map((t, i) => (
               <option value={t} key={i}>
                 {t}

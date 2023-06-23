@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getCountryId } from "../../redux/actions";
+import { cleanDetail, getCountryId } from "../../redux/actions";
 import style from "./Detail.module.css";
 
 const Detail = () => {
@@ -11,6 +11,9 @@ const Detail = () => {
     useSelector((state) => state.idCountry);
   useEffect(() => {
     dispatch(getCountryId(id));
+    return () => {
+      dispatch(cleanDetail);
+    };
   }, [dispatch, id]);
   return (
     <div className={style.ppalDetail}>

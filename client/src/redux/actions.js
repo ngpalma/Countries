@@ -12,6 +12,7 @@ import {
   SET_CURRENT_PAGE,
   CLEAN_FILTER_CONTINENT,
   CLEAN_FILTER_ACTIVITY,
+  CLEAN_DETAIL,
 } from "./types.js";
 
 export const getAllCountries = () => {
@@ -112,3 +113,7 @@ export const setCurrentPage = (page) => {
     payload: page,
   };
 };
+
+export function cleanDetail() {
+  return { type: CLEAN_DETAIL };
+}

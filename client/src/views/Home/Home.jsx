@@ -32,6 +32,7 @@ const Home = () => {
             name="orderByName"
             onChange={(e) => dispatch(orderByName(e.target.value))}
           >
+            <option value="" key="first" hidden>Selecciona una opción</option>
             {["A-Z", "Z-A"].map((e, i) => (
               <option value={e} key={i}>
                 {e}
@@ -45,6 +46,8 @@ const Home = () => {
             name="orderByPopulation"
             onChange={(e) => dispatch(orderByPopulation(e.target.value))}
           >
+            <option value="" key="first" hidden>Selecciona una opción</option>
+
             {["Mayor Población", "Menor Población"].map((e, i) => (
               <option value={e} key={i}>
                 {e}
@@ -62,6 +65,8 @@ const Home = () => {
               dispatch(setCurrentPage(1));
             }}
           >
+            <option value="" key="first" hidden>Selecciona una opción</option>
+
             {[
               "Asia",
               "Europe",
@@ -90,6 +95,8 @@ const Home = () => {
                 dispatch(setCurrentPage(1));
               }}
             >
+            <option value="" key="first" hidden>Selecciona una opción</option>
+
               {activities.map((e) => (
                 <option value={e.name} key={e.id}>
                   {e.name}
