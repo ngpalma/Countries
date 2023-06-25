@@ -2,13 +2,13 @@
   width: 250px;
   height: 150px;
   margin: 10px;
-  /* border: 5px solid #005792; */
+  border: 1px solid white;
   border-radius: 5px;
 }
 
-.colors {
+/* .colors {
   color: #00204a #005792 #00bbf0 #fdb44b;
-}
+} */
 
 .imgCard:hover {
   border-radius: 100%;

@@ -38,15 +38,15 @@ const CardsContainer = () => {
 
   const handlePageClick = (pageNumber) => {
     dispatch(setCurrentPage(pageNumber));
-    const totalPages = Math.ceil(initialCards.length / 10);
+    // const totalPages = Math.ceil(initialCards.length / 10);
     let newStartPage = pageNumber - 2;
     let newEndPage = pageNumber + 2;
     if (newStartPage < 1) {
       newStartPage = 1;
       newEndPage = 5;
     }
-    if (newEndPage > totalPages) {
-      newEndPage = totalPages;
+    if (newEndPage > totalPage) {
+      newEndPage = totalPage;
       newStartPage = Math.max(1, newEndPage - 4);
     }
     setStartPage(newStartPage);
@@ -71,31 +71,25 @@ const CardsContainer = () => {
     return pageNumbers;
   };
 
-  // useEffect(() => {
-  //   const startIndex = (currentPage - 1) * 10;
-  //   const endIndex = startIndex + 10;
-  //   setCurrentCards(initialCards.slice(startIndex, endIndex));
-  // }, [currentPage, initialCards]);
-
   useEffect(() => {
     const startIndex = (currentPage - 1) * 10;
     const endIndex = startIndex + 10;
     setCurrentCards(initialCards.slice(startIndex, endIndex));
 
-    const totalPages = Math.ceil(initialCards.length / 10);
+    // const totalPages = Math.ceil(initialCards.length / 10);
     let newStartPage = currentPage - 2;
     let newEndPage = currentPage + 2;
     if (newStartPage < 1) {
       newStartPage = 1;
       newEndPage = 5;
     }
-    if (newEndPage > totalPages) {
-      newEndPage = totalPages;
+    if (newEndPage > totalPage) {
+      newEndPage = totalPage;
       newStartPage = Math.max(1, newEndPage - 4);
     }
     setStartPage(newStartPage);
     setEndPage(newEndPage);
-  }, [currentPage, initialCards]);
+  }, [currentPage, initialCards, totalPage]);
 
   return (
     <div>
