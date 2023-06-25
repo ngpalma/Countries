@@ -27,12 +27,11 @@ const Home = () => {
     <div className={style.ppalHome}>
       <div className={style.HomeFilters}>
         <div className={style.ordenAlpha}>
-          <p>Orden alfabético:</p>
           <select
             name="orderByName"
             onChange={(e) => dispatch(orderByName(e.target.value))}
           >
-            <option value="" key="first" hidden>Selecciona una opción</option>
+            <option value="" key="first" hidden>Orden alfabético</option>
             {["A-Z", "Z-A"].map((e, i) => (
               <option value={e} key={i}>
                 {e}
@@ -41,12 +40,11 @@ const Home = () => {
           </select>
         </div>
         <div className={style.ordenPop}>
-          <p>Cantidad de habitantes:</p>
           <select
             name="orderByPopulation"
             onChange={(e) => dispatch(orderByPopulation(e.target.value))}
           >
-            <option value="" key="first" hidden>Selecciona una opción</option>
+            <option value="" key="first" hidden>Cantidad de habitantes</option>
 
             {["Mayor Población", "Menor Población"].map((e, i) => (
               <option value={e} key={i}>
@@ -56,7 +54,6 @@ const Home = () => {
           </select>
         </div>
         <div className={style.filterCont}>
-          <p>Continente:</p>
           <select
             name="filterByContinent"
             onChange={(e) => {
@@ -65,7 +62,7 @@ const Home = () => {
               dispatch(setCurrentPage(1));
             }}
           >
-            <option value="" key="first" hidden>Selecciona una opción</option>
+            <option value="" key="first" hidden>Selecciona un continente</option>
 
             {[
               "Asia",
@@ -86,7 +83,6 @@ const Home = () => {
 
         {activities.length > 0 && (
           <div className={style.filterAct}>
-            <p>Actividad:</p>
             <select
               name="filterByActivity"
               onChange={(e) => {
@@ -95,7 +91,7 @@ const Home = () => {
                 dispatch(setCurrentPage(1));
               }}
             >
-            <option value="" key="first" hidden>Selecciona una opción</option>
+            <option value="" key="first" hidden>Selecciona una actividad</option>
 
               {activities.map((e) => (
                 <option value={e.name} key={e.id}>
@@ -114,7 +110,7 @@ const Home = () => {
             dispatch(setCurrentPage(1));
           }}
         >
-          Mostrar todos
+          Borrar filtros
         </button>
       </div>
       <CardsContainer />

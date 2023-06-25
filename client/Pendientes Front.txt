@@ -1,6 +1,3 @@
-Paginado:
-    -Renderizar números de página y flechas. Indicar en qué página está.
-
 Testing:
     -Hacer por lo menos algunos tests basicos tanto del back como del front
 

@@ -9,6 +9,8 @@ const Detail = () => {
   const dispatch = useDispatch();
   const { name, flag, area, population, continent, subregion, activities } =
     useSelector((state) => state.idCountry);
+
+  console.log(activities, "actividades");
   useEffect(() => {
     dispatch(getCountryId(id));
     return () => {
@@ -24,10 +26,12 @@ const Detail = () => {
         <h3> Cantidad de habitantes: {population} </h3>
         <h3> Continente: {continent} </h3>
         <h3> Subregión: {subregion} </h3>
-        {activities && (
+        {typeof activities !== "undefined" && activities.length > 0 ? (
           <div>
             <h3> Actividades: {activities.map((a) => a.name).join(", ")} </h3>
           </div>
+        ) : (
+          <h3>No hay actividades creadas aún</h3>
         )}
       </div>
       <div className={style.imgDetailCss}>

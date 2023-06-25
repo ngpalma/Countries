@@ -54,9 +54,10 @@ span {
 }
 
 .ppalForm form{
-  background-color: #fdb44b;
+  background-color:rgba(253, 180, 75, 0.8);
   border-style: double;
-
+  padding: 20px;
+  border-radius: 20px;
 }
 
 .buttonSubmit{
