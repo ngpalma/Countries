@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
       capital: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: "Sin Capital"
+        defaultValue: "No Capital"
       },
       subregion: {
         type: DataTypes.STRING,

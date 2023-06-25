@@ -63,7 +63,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         : state.filterActivity.length
         ? [...state.filterActivity]
         : [...state.allCountries];
-      // const countriesName = [...state.allCountries];
       const sortName = countriesName.sort((a, b) => {
         if (a.name > b.name) {
           return payload === "A-Z" ? 1 : -1;
@@ -92,7 +91,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         : state.filterActivity.length
         ? [...state.filterActivity]
         : [...state.allCountries];
-      // const countriesPopulation = [...state.allCountries];
       const sortPop = countriesPopulation.sort((a, b) => {
         if (a.population > b.population) {
           return payload === "Mayor Población" ? -1 : 1;

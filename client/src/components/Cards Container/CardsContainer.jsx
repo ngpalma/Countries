@@ -38,7 +38,6 @@ const CardsContainer = () => {
 
   const handlePageClick = (pageNumber) => {
     dispatch(setCurrentPage(pageNumber));
-    // const totalPages = Math.ceil(initialCards.length / 10);
     let newStartPage = pageNumber - 2;
     let newEndPage = pageNumber + 2;
     if (newStartPage < 1) {
@@ -76,7 +75,6 @@ const CardsContainer = () => {
     const endIndex = startIndex + 10;
     setCurrentCards(initialCards.slice(startIndex, endIndex));
 
-    // const totalPages = Math.ceil(initialCards.length / 10);
     let newStartPage = currentPage - 2;
     let newEndPage = currentPage + 2;
     if (newStartPage < 1) {

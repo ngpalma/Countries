@@ -1,8 +1,5 @@
 Testing:
     -Hacer por lo menos algunos tests basicos tanto del back como del front
 
-CSS:
-    -refactorizar o ver como hacer para no repetir tanto código
-
 Deploy:
     -Hacer deploy

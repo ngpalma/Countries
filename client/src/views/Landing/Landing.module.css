@@ -31,14 +31,12 @@
 .ppalContainer h2 {
   font-size: 30px;
   text-shadow: 3px 3px 1px white;
-
 }
 
 .linksDiv {
   display: flex;
   flex-direction: row;
   align-items: center;
-
 }
 
 .linksDiv img {
@@ -53,10 +51,7 @@
   height: 50px;
 }
 
-.caption {
-  color:red;
-  
-}
-.caption h3{
+.caption h3 {
   margin: 0%;
+  color: red;
 }

@@ -27,7 +27,6 @@ const Landing = () => {
       </Link>
       {showCaption && (
         <div className={styles.caption}>
-          <h3>↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑</h3>
           <h3>INGRESAR AL SITIO</h3>
         </div>
       )}

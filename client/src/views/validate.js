@@ -15,7 +15,7 @@ const validate = (form) => {
   
     if (form.duration === "") errors.duration = "Este campo no puede estar vacío";
     else if (!/^[0-9]+$/.test(form.duration))
-      errors.duration = "Duración en horas";
+      errors.duration = "Duración en horas, solo número";
   
     if (form.countries === "")
       errors.countries = "Este campo no puede estar vacío";

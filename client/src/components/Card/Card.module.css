@@ -6,22 +6,16 @@
   border-radius: 5px;
 }
 
-/* .colors {
-  color: #00204a #005792 #00bbf0 #fdb44b;
-} */
-
 .imgCard:hover {
   border-radius: 100%;
   width: 250px;
   height: 150px;
   margin: 10px;
-  /* border: 5px solid white; */
 }
 
 .cardCss {
   background-color: rgba(0, 32, 74, 0.8);
   display: flex;
-  /* border: 5px solid #fdb44b; */
   flex-direction: column;
   flex-wrap: wrap;
   width: fit-content;
