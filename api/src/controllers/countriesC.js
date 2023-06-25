@@ -12,15 +12,17 @@ const getAllCountriesApi = async () => {
 const createDbCountries = async () => {
   const countries = await getAllCountriesApi();
   for (const country of countries) {
-    await Country.create({
-      id: country.alpha3Code,
-      name: country.name,
-      flag: country.flags.png,
-      continent: country.region,
-      capital: country.capital,
-      subregion: country.subregion,
-      area: country.area,
-      population: country.population,
+    await Country.findOrCreate({
+      where: { id: country.alpha3Code }, // Utiliza el código alpha3Code como criterio de búsqueda
+      defaults: {
+        name: country.name,
+        flag: country.flags.png,
+        continent: country.region,
+        capital: country.capital,
+        subregion: country.subregion,
+        area: country.area,
+        population: country.population,
+      },
     });
   }
 };
