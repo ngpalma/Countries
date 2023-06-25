@@ -58,6 +58,7 @@ span {
   border-style: double;
   padding: 20px;
   border-radius: 20px;
+  border-color: white;
 }
 
 .buttonSubmit{
@@ -69,4 +70,17 @@ span {
 .buttonSubmit button:hover {
   background-color: #00204a;
   color: #fdb44b;
+}
+
+.buttonSubmit button{
+  background-color: rgba(242, 242, 242, 0.6);
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none
 }
