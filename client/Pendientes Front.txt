@@ -1,5 +1,0 @@
-Testing:
-    -Hacer por lo menos algunos tests basicos tanto del back como del front
-
-Deploy:
-    -Hacer deploy

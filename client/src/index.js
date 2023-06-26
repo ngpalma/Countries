@@ -4,6 +4,10 @@ import { createRoot } from "react-dom/client";
 import store from "./redux/store";
 import App from "./App";
 import "./index.css";
+import axios from "axios"
+
+// axios.defaults.baseURL = "http://localhost:3001"
+axios.defaults.baseURL = "https://countriesback-production-03c3.up.railway.app/"
 
 const domNode = document.getElementById("root");
 const root = createRoot(domNode);

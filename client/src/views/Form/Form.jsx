@@ -55,7 +55,7 @@ const Form = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:3001/activities", form)
+      .post("/activities", form)
       .then((res) => {
         alert("Actividad creada correctamente");
         navigate("/home");
