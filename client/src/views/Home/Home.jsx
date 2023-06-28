@@ -29,9 +29,14 @@ const Home = () => {
         <div className={style.ordenAlpha}>
           <select
             name="orderByName"
-            onChange={(e) => dispatch(orderByName(e.target.value))}
+            onChange={(e) => {
+              dispatch(orderByName(e.target.value));
+              dispatch(setCurrentPage(1));
+            }}
           >
-            <option value="" key="first" hidden>Orden alfabético</option>
+            <option value="" key="first" hidden>
+              Orden alfabético
+            </option>
             {["A-Z", "Z-A"].map((e, i) => (
               <option value={e} key={i}>
                 {e}
@@ -42,9 +47,14 @@ const Home = () => {
         <div className={style.ordenPop}>
           <select
             name="orderByPopulation"
-            onChange={(e) => dispatch(orderByPopulation(e.target.value))}
+            onChange={(e) => {
+              dispatch(orderByPopulation(e.target.value));
+              dispatch(setCurrentPage(1));
+            }}
           >
-            <option value="" key="first" hidden>Cantidad de habitantes</option>
+            <option value="" key="first" hidden>
+              Cantidad de habitantes
+            </option>
 
             {["Mayor Población", "Menor Población"].map((e, i) => (
               <option value={e} key={i}>
@@ -62,7 +72,9 @@ const Home = () => {
               dispatch(setCurrentPage(1));
             }}
           >
-            <option value="" key="first" hidden>Selecciona un continente</option>
+            <option value="" key="first" hidden>
+              Selecciona un continente
+            </option>
 
             {[
               "Asia",
@@ -91,7 +103,9 @@ const Home = () => {
                 dispatch(setCurrentPage(1));
               }}
             >
-            <option value="" key="first" hidden>Selecciona una actividad</option>
+              <option value="" key="first" hidden>
+                Selecciona una actividad
+              </option>
 
               {activities.map((e) => (
                 <option value={e.name} key={e.id}>

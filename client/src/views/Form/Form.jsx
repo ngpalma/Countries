@@ -16,6 +16,10 @@ const Form = () => {
     dispatch(getAllCountries());
   }, [dispatch]);
 
+  const countryOrder = [...country].sort((a, b) => {
+    return a.name.localeCompare(b.name);
+  });
+
   const [form, setForm] = useState({
     name: "",
     difficulty: "",
@@ -161,7 +165,7 @@ const Form = () => {
             value={form.countries}
             onChange={handleSelectChange}
           >
-            {country.map((c) => (
+            {countryOrder.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.name}
               </option>

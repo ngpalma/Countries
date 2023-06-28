@@ -22,7 +22,7 @@ const Detail = () => {
       <div className={style.detailCss}>
         <h2> Nombre: {name} </h2>
         <h3> Id: {id} </h3>
-        <h3> Area: {area} </h3>
+        <h3> Area: {area !== null ? area : "No area"} </h3>
         <h3> Cantidad de habitantes: {population} </h3>
         <h3> Continente: {continent} </h3>
         <h3> Subregión: {subregion} </h3>
