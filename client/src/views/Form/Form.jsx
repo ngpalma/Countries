@@ -1,24 +1,24 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { motion } from "framer-motion";
+import axios from "axios";
+import { toast } from "sonner";
 import validate from "../validate";
-import { getAllCountries } from "../../redux/actions";
-import style from "./Form.module.css";
+import { useCountries } from "../../hooks/useCountries";
+
+const inputClass =
+  "w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm placeholder:text-white/40 outline-none focus:border-brand-amber transition-colors";
+
+const postActivity = async (form) => {
+  const { data } = await axios.post("/activities", form);
+  return data;
+};
 
 const Form = () => {
-  const country = useSelector((state) => state.allCountries);
-
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    dispatch(getAllCountries());
-  }, [dispatch]);
-
-  const countryOrder = [...country].sort((a, b) => {
-    return a.name.localeCompare(b.name);
-  });
+  const { data: countries = [] } = useCountries();
+  const countryOrder = [...countries].sort((a, b) => a.name.localeCompare(b.name));
 
   const [form, setForm] = useState({
     name: "",
@@ -27,163 +27,134 @@ const Form = () => {
     duration: "",
     countries: [],
   });
+  const [errors, setErrors] = useState({});
 
-  const [errors, setErrors] = useState({
-    name: "",
-    difficulty: "",
-    season: "",
-    duration: "",
-    countries: [],
+  const mutation = useMutation({
+    mutationFn: postActivity,
+    onSuccess: () => {
+      toast.success("¡Actividad creada correctamente!");
+      setTimeout(() => navigate("/home"), 1200);
+    },
+    onError: () => {
+      toast.error("Ocurrió un error al crear la actividad.");
+    },
   });
 
-  const handleSelectChange = (event) => {
-    const value = event.target.value;
-    const selectedCountries = form.countries;
-    if (selectedCountries.includes(value)) {
-      setForm({
-        ...form,
-        countries: selectedCountries.filter((c) => c !== value),
-      });
-    } else {
-      setForm({ ...form, countries: [...selectedCountries, value] });
-    }
+  const handleChange = ({ target: { name, value } }) => {
+    const updated = { ...form, [name]: value };
+    setForm(updated);
+    setErrors(validate(updated));
   };
 
-  const handleChange = (event) => {
-    const property = event.target.name;
-    const value = event.target.value;
-    setForm({ ...form, [property]: value });
-    setErrors(validate({ ...form, [property]: value }));
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    axios
-      .post("/activities", form)
-      .then((res) => {
-        alert("Actividad creada correctamente");
-        navigate("/home");
-      })
-      .catch((err) => {
-        alert("Ocurrió un error durante la creación");
-        navigate("/home");
-      });
+  const handleSelectChange = ({ target: { value } }) => {
+    const selected = form.countries;
     setForm({
-      name: "",
-      difficulty: "",
-      season: "",
-      duration: "",
-      countries: [],
+      ...form,
+      countries: selected.includes(value)
+        ? selected.filter((c) => c !== value)
+        : [...selected, value],
     });
   };
 
-  const encontrarId = (id) => {
-    const guardar = country.find((c) => c.id === id);
-    return guardar.name;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    mutation.mutate(form);
   };
 
-  const arrayName = form.countries.map((e) => encontrarId(e));
+  const selectedNames = form.countries.map(
+    (id) => countryOrder.find((c) => c.id === id)?.name || id
+  );
+
+  const isValid =
+    form.name && form.difficulty && form.season && form.duration &&
+    form.countries.length > 0 &&
+    !errors.name && !errors.difficulty && !errors.season && !errors.duration;
 
   return (
-    <div className={style.ppalForm}>
-      <form onSubmit={handleSubmit}>
-        {/* NOMBRE DE LA ACTIVIDAD */}
-        <label htmlFor="name">
-          <p>Nombre de la actividad turística:</p>
-          <input
-            type="text"
-            name="name"
-            placeholder="Ingrese una actividad..."
-            value={form.name}
-            onChange={handleChange}
-          />
-          {errors.name && <span>{errors.name}</span>}
-        </label>
+    <div
+      className="min-h-screen bg-cover bg-center bg-fixed flex items-center justify-center px-4 py-10"
+      style={{ backgroundImage: "url('https://images6.alphacoders.com/400/400645.jpg')" }}
+    >
+      <motion.div
+        className="w-full max-w-lg bg-navy/85 backdrop-blur-sm rounded-2xl shadow-2xl p-5 sm:p-8 border border-white/10"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
+      >
+        <h2 className="text-2xl font-bold text-white mb-6 text-center">Nueva Actividad Turística</h2>
 
-        {/* DIFICULTAD */}
-        <label htmlFor="difficulty">
-          <p>Dificultad:</p>
-          <input
-            type="number"
-            name="difficulty"
-            placeholder="Ingrese un número del 1 al 5..."
-            value={form.difficulty}
-            onChange={handleChange}
-          />
-          {errors.difficulty && <span>{errors.difficulty}</span>}
-        </label>
+        <form onSubmit={handleSubmit} className="space-y-5">
 
-        {/* TEMPORADA */}
-        <label htmlFor="season">
-          <p>Temporada:</p>
-          <input
-            type="text"
-            name="season"
-            placeholder="Ingrese una estación o temporada del año..."
-            value={form.season}
-            onChange={handleChange}
-            hidden
-          />
-          <select name="season" value={form.season} onChange={handleChange}>
-          <option value="" key="first" hidden>Selecciona una opción</option>
+          <div>
+            <label className="text-brand-amber text-sm font-semibold block mb-1">Nombre de la actividad</label>
+            <input type="text" name="name" placeholder="Ej: Senderismo en montaña"
+              value={form.name} onChange={handleChange} className={inputClass} />
+            {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+          </div>
 
-            {["Verano", "Otoño", "Invierno", "Primavera"].map((t, i) => (
-              <option value={t} key={i}>
-                {t}
-              </option>
-            ))}
-          </select>
-          {errors.season && <span>{errors.season}</span>}
-        </label>
+          <div>
+            <label className="text-brand-amber text-sm font-semibold block mb-1">Dificultad (1–5)</label>
+            <input type="number" name="difficulty" placeholder="Ingrese un número del 1 al 5"
+              value={form.difficulty} onChange={handleChange} min="1" max="5" className={inputClass} />
+            {errors.difficulty && <p className="text-red-400 text-xs mt-1">{errors.difficulty}</p>}
+          </div>
 
-        {/* DURACION */}
-        <label htmlFor="duration">
-          <p>Duración:</p>
-          <input
-            type="number"
-            name="duration"
-            placeholder="Ingrese la duración de la actividad en horas..."
-            value={form.duration}
-            onChange={handleChange}
-          />
-          {errors.duration && <span>{errors.duration}</span>}
-        </label>
+          <div>
+            <label className="text-brand-amber text-sm font-semibold block mb-1">Temporada</label>
+            <select name="season" value={form.season} onChange={handleChange}
+              className={`${inputClass} cursor-pointer`}>
+              <option value="" hidden>Selecciona una estación</option>
+              {["Verano", "Otoño", "Invierno", "Primavera"].map((t) => (
+                <option key={t} value={t} className="bg-navy text-white">{t}</option>
+              ))}
+            </select>
+            {errors.season && <p className="text-red-400 text-xs mt-1">{errors.season}</p>}
+          </div>
 
-        {/* PAISES */}
-        <label htmlFor="countries">
-          <p>Paises donde se pueda realizar:</p>
-          <input
-            type="text"
-            name="countries"
-            placeholder="Seleccione uno o más paises"
-            value={arrayName}
-            onChange={handleChange}
-          />
-          <select
-            name="countries"
-            multiple={true}
-            value={form.countries}
-            onChange={handleSelectChange}
-          >
-            {countryOrder.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-          {errors.countries && <span>{errors.countries}</span>}
-        </label>
-        <br />
-        {form.name.length !== 0 &&
-          form.difficulty.length !== 0 &&
-          form.season.length !== 0 &&
-          form.duration.length !== 0 &&
-          form.countries.length !== 0 && (
-            <div className={style.buttonSubmit}>
-              <button type="submit">Crear Actividad</button>
-            </div>
+          <div>
+            <label className="text-brand-amber text-sm font-semibold block mb-1">Duración (horas)</label>
+            <input type="number" name="duration" placeholder="Ej: 3"
+              value={form.duration} onChange={handleChange} min="1" className={inputClass} />
+            {errors.duration && <p className="text-red-400 text-xs mt-1">{errors.duration}</p>}
+          </div>
+
+          <div>
+            <label className="text-brand-amber text-sm font-semibold block mb-1">
+              Países donde se puede realizar
+            </label>
+            <select name="countries" multiple value={form.countries} onChange={handleSelectChange}
+              className={`${inputClass} h-36 cursor-pointer`}>
+              {countryOrder.map((c) => (
+                <option key={c.id} value={c.id} className="bg-navy text-white py-0.5">{c.name}</option>
+              ))}
+            </select>
+            {selectedNames.length > 0 && (
+              <div className="flex flex-wrap gap-1 mt-2">
+                {selectedNames.map((n) => (
+                  <span key={n} className="bg-brand-amber/20 text-brand-amber text-xs px-2 py-0.5 rounded-full border border-brand-amber/40">
+                    {n}
+                  </span>
+                ))}
+              </div>
+            )}
+            {errors.countries && <p className="text-red-400 text-xs mt-1">{errors.countries}</p>}
+          </div>
+
+          {isValid && (
+            <motion.button
+              type="submit"
+              disabled={mutation.isPending}
+              className="w-full py-2.5 rounded-lg bg-brand-amber text-navy font-bold text-sm hover:bg-yellow-400 transition-colors duration-200 disabled:opacity-60"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {mutation.isPending ? "Creando..." : "Crear Actividad"}
+            </motion.button>
           )}
-      </form>
+        </form>
+      </motion.div>
     </div>
   );
 };

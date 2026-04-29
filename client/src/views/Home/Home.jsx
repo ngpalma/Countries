@@ -1,132 +1,79 @@
-import { CardsContainer } from "../../components/index";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getAllCountries,
-  orderByName,
-  orderByPopulation,
-  filterByActivity,
-  filterByContinent,
+  setContinentFilter,
+  setActivityFilter,
+  setSort,
+  clearFilters,
   setCurrentPage,
-  getAllActivities,
-  cleanFilterActivity,
-  cleanFilterContinent,
 } from "../../redux/actions";
-import style from "./Home.module.css";
+import { useActivities } from "../../hooks/useActivities";
+import { CardsContainer } from "../../components/index";
+
+const selectClass =
+  "w-full sm:w-auto bg-navy/80 text-white text-sm rounded-lg px-3 py-1.5 border border-white/20 outline-none cursor-pointer hover:border-brand-amber focus:border-brand-amber transition-colors";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const activities = useSelector((state) => state.allActivities);
-
-  useEffect(() => {
-    dispatch(getAllCountries());
-    dispatch(getAllActivities());
-  }, [dispatch]);
+  const { data: activities = [] } = useActivities();
 
   return (
-    <div className={style.ppalHome}>
-      <div className={style.HomeFilters}>
-        <div className={style.ordenAlpha}>
-          <select
-            name="orderByName"
-            onChange={(e) => {
-              dispatch(orderByName(e.target.value));
-              dispatch(setCurrentPage(1));
-            }}
-          >
-            <option value="" key="first" hidden>
-              Orden alfabético
-            </option>
-            {["A-Z", "Z-A"].map((e, i) => (
-              <option value={e} key={i}>
-                {e}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className={style.ordenPop}>
-          <select
-            name="orderByPopulation"
-            onChange={(e) => {
-              dispatch(orderByPopulation(e.target.value));
-              dispatch(setCurrentPage(1));
-            }}
-          >
-            <option value="" key="first" hidden>
-              Cantidad de habitantes
-            </option>
+    <div
+      className="min-h-screen bg-cover bg-center bg-fixed overflow-y-auto"
+      style={{
+        backgroundImage:
+          "url('https://images.ecestaticos.com/q_LkdOe0sqZmPRHmfMzMEYCi3aM=/0x0:1254x836/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F405%2F46d%2F46a%2F40546d46aeb1cbc50a89643a1bef684b.jpg')",
+      }}
+    >
+      {/* Filter bar */}
+      <div className="sticky top-0 z-40 grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 bg-navy/85 backdrop-blur-sm shadow-md">
+        <select
+          className={selectClass}
+          onChange={(e) => { dispatch(setSort(e.target.value)); dispatch(setCurrentPage(1)); }}
+        >
+          <option value="" hidden>Orden alfabético</option>
+          {["A-Z", "Z-A"].map((e, i) => <option key={i} value={e}>{e}</option>)}
+        </select>
 
-            {["Mayor Población", "Menor Población"].map((e, i) => (
-              <option value={e} key={i}>
-                {e}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className={style.filterCont}>
-          <select
-            name="filterByContinent"
-            onChange={(e) => {
-              dispatch(cleanFilterActivity());
-              dispatch(filterByContinent(e.target.value));
-              dispatch(setCurrentPage(1));
-            }}
-          >
-            <option value="" key="first" hidden>
-              Selecciona un continente
-            </option>
+        <select
+          className={selectClass}
+          onChange={(e) => { dispatch(setSort(e.target.value)); dispatch(setCurrentPage(1)); }}
+        >
+          <option value="" hidden>Población</option>
+          {["Mayor Población", "Menor Población"].map((e, i) => (
+            <option key={i} value={e}>{e}</option>
+          ))}
+        </select>
 
-            {[
-              "Asia",
-              "Europe",
-              "Africa",
-              "Oceania",
-              "Americas",
-              "Polar",
-              "Antarctic Ocean",
-              "Antarctic",
-            ].map((e, i) => (
-              <option value={e} key={i}>
-                {e}
-              </option>
-            ))}
-          </select>
-        </div>
+        <select
+          className={selectClass}
+          onChange={(e) => dispatch(setContinentFilter(e.target.value))}
+        >
+          <option value="" hidden>Continente</option>
+          {["Asia", "Europe", "Africa", "Oceania", "Americas", "Polar", "Antarctic Ocean", "Antarctic"].map(
+            (e, i) => <option key={i} value={e}>{e}</option>
+          )}
+        </select>
 
         {activities.length > 0 && (
-          <div className={style.filterAct}>
-            <select
-              name="filterByActivity"
-              onChange={(e) => {
-                dispatch(cleanFilterContinent());
-                dispatch(filterByActivity(e.target.value));
-                dispatch(setCurrentPage(1));
-              }}
-            >
-              <option value="" key="first" hidden>
-                Selecciona una actividad
-              </option>
-
-              {activities.map((e) => (
-                <option value={e.name} key={e.id}>
-                  {e.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <select
+            className={selectClass}
+            onChange={(e) => dispatch(setActivityFilter(e.target.value))}
+          >
+            <option value="" hidden>Actividad</option>
+            {activities.map((e) => (
+              <option key={e.id} value={e.name}>{e.name}</option>
+            ))}
+          </select>
         )}
 
         <button
-          onClick={() => {
-            dispatch(getAllCountries());
-            dispatch(cleanFilterContinent());
-            dispatch(cleanFilterActivity());
-            dispatch(setCurrentPage(1));
-          }}
+          onClick={() => dispatch(clearFilters())}
+          className="col-span-2 sm:col-span-1 px-4 py-1.5 rounded-lg bg-white/10 text-white/70 text-sm hover:bg-red-500/70 hover:text-white transition-colors duration-200"
         >
-          Borrar filtros
+          ✕ Borrar filtros
         </button>
       </div>
+
       <CardsContainer />
     </div>
   );

@@ -1,37 +1,33 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getCountriesName, setCurrentPage } from "../../redux/actions";
-import style from "./SearchBar.module.css";
+import { useDispatch } from "react-redux";
+import { setSearchName } from "../../redux/actions";
 
 const SearchBar = () => {
-  const [countryName, setCountryName] = useState("");
+  const [input, setInput] = useState("");
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.error);
 
-  const handleInputChange = (e) => {
-    setCountryName(e.target.value);
-  };
-
-  const handleSearch = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(getCountriesName(countryName));
-    dispatch(setCurrentPage(1));
-    setCountryName("");
+    dispatch(setSearchName(input.trim()));
+    setInput("");
   };
 
   return (
-    <div className={style.searchDiv}>
-      <form onSubmit={handleSearch}>
-        <input
-          type="search"
-          placeholder="Busque un pais por nombre..."
-          value={countryName}
-          onChange={handleInputChange}
-        />
-        <button type="submit">BUSCAR</button>
-      </form>
-      {error && <p className={style.error}>{error}</p>}
-    </div>
+    <form onSubmit={handleSubmit} className="flex items-center">
+      <input
+        type="search"
+        placeholder="Buscar país..."
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        className="h-8 px-3 rounded-l text-sm text-navy bg-white/90 border-0 outline-none w-52 sm:w-64 placeholder:text-gray-400"
+      />
+      <button
+        type="submit"
+        className="h-8 px-3 bg-brand-amber text-navy text-sm font-bold rounded-r hover:bg-yellow-400 transition-colors"
+      >
+        Buscar
+      </button>
+    </form>
   );
 };
 
