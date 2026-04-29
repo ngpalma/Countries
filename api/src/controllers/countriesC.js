@@ -3,7 +3,7 @@ const { Country, Activity } = require("../db");
 
 const getAllCountriesApi = async () => {
   const response = await axios.get(
-    "https://rest-countries.up.railway.app/v2/all"
+    "https://restcountries.com/v3.1/all?fields=name,cca3,flags,region,subregion,capital,area,population"
   );
   const countries = response.data;
   return countries;
@@ -13,12 +13,12 @@ const createDbCountries = async () => {
   const countries = await getAllCountriesApi();
   for (const country of countries) {
     await Country.findOrCreate({
-      where: { id: country.alpha3Code }, // Utiliza el código alpha3Code como criterio de búsqueda
+      where: { id: country.cca3 }, // Utiliza el código alpha3Code como criterio de búsqueda
       defaults: {
-        name: country.name,
+        name: country.name.official,
         flag: country.flags.png,
         continent: country.region,
-        capital: country.capital,
+        capital: country.capital?.[0] || "No Capital",
         subregion: country.subregion,
         area: country.area,
         population: country.population,
