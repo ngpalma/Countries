@@ -106,7 +106,7 @@ PI-Countries/
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/ngpalma/PI-Countries.git
+git clone https://github.com/ngpalma/Countries.git
 cd PI-Countries
 ```
 
